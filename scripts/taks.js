@@ -14,12 +14,12 @@ window.addEventListener('load', function () {
   /*                          FUNCIÓN 1 - Cerrar sesión                         */
   /* -------------------------------------------------------------------------- */
 
-  btnCerrarSesion.addEventListener('click', function () {
+  // btnCerrarSesion.addEventListener('click', function () {
    
 
 
 
-  });
+  // });
 
   /* -------------------------------------------------------------------------- */
   /*                 FUNCIÓN 2 - Obtener nombre de usuario [GET]                */
