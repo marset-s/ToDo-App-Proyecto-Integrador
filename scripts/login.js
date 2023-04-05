@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
 
 	const url = "https://todo-api.ctd.academy/v1";
 
-	//console.log(form, email, password, url)
+	
 
 	/* -------------------------------------------------------------------------- */
 	/*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */

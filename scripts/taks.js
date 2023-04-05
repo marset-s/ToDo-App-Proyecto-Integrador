@@ -1,6 +1,10 @@
 // SEGURIDAD: Si no se encuentra en localStorage info del usuario
 // no lo deja acceder a la página, redirigiendo al login inmediatamente.
 
+if(!localStorage.jwt){
+  alert("Debe loguearse para ingresar al sitio")
+  location.replace("./index.html")
+}
 
 
 /* ------ comienzan las funcionalidades una vez que carga el documento ------ */
@@ -26,7 +30,7 @@ window.addEventListener('load', function () {
   /* -------------------------------------------------------------------------- */
 
   function obtenerNombreUsuario() {
-   
+  
 
 
 
