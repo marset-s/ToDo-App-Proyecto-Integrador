@@ -35,7 +35,29 @@ window.addEventListener("load", function () {
 	/* -------------------------------------------------------------------------- */
 	/*                     FUNCIÓN 2: Realizar el login [POST]                    */
 	/* -------------------------------------------------------------------------- */
-    realizarLogin(settings){
-        
-    };
+	function realizarLogin(settings) {
+		console.log("lanzando la consulta a la api");
+
+		fetch(`${url}/users/login`, settings)
+			.then((response) => {
+				console.log(response);
+				if (response.ok != true) {
+					alert("Alguno de los datos es incorrecto");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				console.log("promesa cumplida");
+				console.log(data);
+
+				if (data.jwt) {
+					location.replace("./mis-tareas.html");
+					localStorage.setItem("jwt", JSON.stringify(data.jwt));
+				}
+			})
+			.catch((err) => {
+				console.log("Promesa rechazada");
+				console.log(err);
+			});
+	}
 });
