@@ -12,15 +12,20 @@ window.addEventListener('load', function () {
 
   /* ---------------- variables globales y llamado a funciones ---------------- */
   
+  const urlTareas = "https://todo-api.ctd.academy/v1/task";
+  const urlUsuario = "https://todo-api.ctd.academy/v1/users/getMe";
+  const token = JSON.parse(localStorage.jwt);
+
+  const formCrearTarea = this.document.querySelector(".nueva-tarea");
+  const nuevaTarea = this.document.querySelector("#nuevaTarea");
+  const btnCerrarSesion = this.document.querySelector("#closeApp");
 
 
   /* -------------------------------------------------------------------------- */
   /*                          FUNCIÓN 1 - Cerrar sesión                         */
   /* -------------------------------------------------------------------------- */
 
-  // btnCerrarSesion.addEventListener('click', function () {
   
-
 
 
   // });
