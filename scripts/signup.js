@@ -27,7 +27,15 @@ window.addEventListener("load", function () {
 			password: inputPassword,
 		};
 
-		realizarRegister(payload);
+		const settings = {
+			method: "POST",
+			body: JSON.stringify(payload),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+
+		realizarRegister(settings);
 	});
 
 	/* -------------------------------------------------------------------------- */
