@@ -37,7 +37,26 @@ window.addEventListener("load", function () {
 	/* -------------------------------------------------------------------------- */
 	/*                 FUNCIÓN 2 - Obtener nombre de usuario [GET]                */
 	/* -------------------------------------------------------------------------- */
+  function obtenerNombreUsuario() {
+  
+    const setting = {
+      method: "GET",
+      headers: {
+        authorization: token,
+      }
+    };
 
+    console.log("Consultando el usuario");
+    fetch(urlUsuario, setting)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Nombre de usuario:");
+      console.log(data.firstName);
+      const nombreUsuario = document.querySelector(".user-info p");
+      nombreUsuario.textContent = data.firstName;
+    })
+    .catch(error=>console.log(error));
+}
 	/* -------------------------------------------------------------------------- */
 	/*                 FUNCIÓN 3 - Obtener listado de tareas [GET]                */
 	/* -------------------------------------------------------------------------- */
