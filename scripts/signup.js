@@ -5,9 +5,9 @@ window.addEventListener("load", function () {
 	const lastName = this.document.querySelector("#inputApellido");
 	const email = this.document.querySelector("#inputEmail");
 	const password = this.document.querySelector("#inputPassword");
-	const passwordRepetida = this.document.querySelector(
-		"#inputPasswordRepetida"
-	);
+	const passwordRepetida = this.document.querySelector("#inputPasswordRepetida");
+
+	const url = "https://todo-api.ctd.academy/v1";
 
 	/* -------------------------------------------------------------------------- */
 	/*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */
@@ -41,5 +41,26 @@ window.addEventListener("load", function () {
 	/* -------------------------------------------------------------------------- */
 	/*                    FUNCIÓN 2: Realizar el signup [POST]                    */
 	/* -------------------------------------------------------------------------- */
-	function realizarRegister(settings) {}
+	function realizarRegister(settings) {
+		console.log("Enviando datos del registro a la api");
+
+		fetch(`${url}/users`, settings)
+			.then((response) => {
+				console.log(response);
+				return response.json();
+			})
+			.then((data) => {
+				console.log("Promesa cumplida");
+				console.log(data);
+
+				if (data.jwt) {
+					location.replace("./mis-tareas.html");
+					localStorage.setItem("jwt", JSON.stringify(data.jwt));
+				}
+			})
+			.catch((err) => {
+				console.log("Promesa rechazada");
+				console.log(err);
+			});
+	}
 });
