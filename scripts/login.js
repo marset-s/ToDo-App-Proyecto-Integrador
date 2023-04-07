@@ -1,5 +1,6 @@
 window.addEventListener("load", function () {
 	/* ---------------------- obtenemos variables globales ---------------------- */
+	
 
 	const form = this.document.querySelector("form");
 	const email = this.document.querySelector("#inputEmail");

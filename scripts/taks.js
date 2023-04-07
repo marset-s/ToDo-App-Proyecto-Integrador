@@ -2,13 +2,17 @@
 // no lo deja acceder a la página, redirigiendo al login inmediatamente.
 
 if (!localStorage.jwt) {
-	alert("Debe loguearse para ingresar al sitio");
-	location.replace("./index.html");
+  alert("Debe loguearse para ingresar al sitio");
+  location.replace("./index.html");
+  
 }
+
 
 /* ------ comienzan las funcionalidades una vez que carga el documento ------ */
 window.addEventListener("load", function () {
 	/* ---------------- variables globales y llamado a funciones ---------------- */
+
+
 
 	const urlTareas = "https://todo-api.ctd.academy/v1/task";
 	const urlUsuario = "https://todo-api.ctd.academy/v1/users/getMe";
@@ -19,6 +23,7 @@ window.addEventListener("load", function () {
 	const btnCerrarSesion = this.document.querySelector("#closeApp");
 
 	obtenerNombreUsuario();
+	consultarTareas();
 
 	/* -------------------------------------------------------------------------- */
 	/*                          FUNCIÓN 1 - Cerrar sesión                         */
@@ -61,7 +66,28 @@ window.addEventListener("load", function () {
 	/*                 FUNCIÓN 3 - Obtener listado de tareas [GET]                */
 	/* -------------------------------------------------------------------------- */
 
-	function consultarTareas() {}
+	function consultarTareas() {
+		const settings = {
+			method: "GET",
+			headers: {
+				authorization: token,
+			}
+		};
+
+		console.log("Consultando mis tareas...");
+		fetch(urlTareas, settings)
+		.then(response => response.json())
+		.then(tareas => {
+			console.log("Tareas del usuario:");
+			console.log(tareas);
+
+			renderizarTareas(tareas)
+			botonesCambioEstado()
+			botonBorrarTarea()
+		})
+		.catch(err => console.log(err))
+		
+};
 
 	/* -------------------------------------------------------------------------- */
 	/*                    FUNCIÓN 4 - Crear nueva tarea [POST]                    */
