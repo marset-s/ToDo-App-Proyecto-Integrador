@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
 
 
 
-	const urlTareas = "https://todo-api.ctd.academy/v1/task";
+	const urlTareas = "https://todo-api.ctd.academy/v1/tasks";
 	const urlUsuario = "https://todo-api.ctd.academy/v1/users/getMe";
 	const token = JSON.parse(localStorage.jwt);
 
@@ -93,7 +93,40 @@ window.addEventListener("load", function () {
 	/*                    FUNCIÓN 4 - Crear nueva tarea [POST]                    */
 	/* -------------------------------------------------------------------------- */
 
-	formCrearTarea.addEventListener("submit", function (event) {});
+	formCrearTarea.addEventListener("submit", function (e) {
+		e.preventDefault();
+
+		console.log("Crear tarea");
+		console.log(nuevaTarea.value);
+
+		const payload ={
+				description: nuevaTarea.value,
+				
+			}
+
+		const settings = {
+			method: "POST",
+			body: JSON.stringify(payload),
+			headers: {
+				
+				'content-type': 'application/json',
+				authorization: token	
+				
+			},
+		};
+
+		console.log("Creando una tarea en la DB");
+		fetch(urlTareas, settings)
+		.then(response => response.json())
+		.then(tarea => {
+			console.log(tarea)
+			consultarTareas()
+		})
+		.catch(err => console.log(err))
+		formCrearTarea.reset()
+
+
+	});
 
 	/* -------------------------------------------------------------------------- */
 	/*                  FUNCIÓN 5 - Renderizar tareas en pantalla                 */
