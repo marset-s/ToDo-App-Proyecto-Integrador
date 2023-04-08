@@ -216,5 +216,38 @@ window.addEventListener("load", function () {
 	/* -------------------------------------------------------------------------- */
 	/*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
 	/* -------------------------------------------------------------------------- */
-	function botonBorrarTarea() {}
+	function botonBorrarTarea() {
+		const btnBorrarTarea = document.querySelectorAll(".borrar");
+
+		btnBorrarTarea.forEach((boton) => {
+			//a cada boton le agrego la funcionalidad
+			boton.addEventListener("click", (e) => {
+				//console.log(event);
+				//console.log(event.target);
+				//console.log(event.target.id);
+
+				const id = e.target.id;
+				const uriTareaId = `${urlTareas}/${id}`;
+
+				//preparamos el llamado a la api
+
+				const settings = {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: token,
+					},
+				};
+
+				// hacemos el fetch
+				fetch(uriTareaId, settings)
+					.then((response) => {
+						console.log(response.status);
+						// Vuelvo a consultar las tareas actualizadas y pintarlas nuevamente en pantalla
+						consultarTareas();
+					})
+					.catch((err) => console.log(err));
+			});
+		});
+	}
 });
