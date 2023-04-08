@@ -134,7 +134,7 @@ window.addEventListener("load", function () {
 			let fecha = new Date(tarea.createdAt);
 			if (tarea.completed) {
 				contador++;
-				tareasTerminadas.innerHTML = `
+				tareasTerminadas.innerHTML += `
 			<li class="tarea">
 				<div class="hecha">
 				<i class="fa-regular fa-circle-check"></i>
@@ -169,7 +169,49 @@ window.addEventListener("load", function () {
 	/* -------------------------------------------------------------------------- */
 	/*                  FUNCIÓN 6 - Cambiar estado de tarea [PUT]                 */
 	/* -------------------------------------------------------------------------- */
-	function botonesCambioEstado() {}
+	function botonesCambioEstado() {
+		const btnCambioEstado = document.querySelectorAll(".change");
+
+		btnCambioEstado.forEach((boton) => {
+			//le agrego funcionalidad a cada boton
+			boton.addEventListener("click", (e) => {
+				console.log("Cambiando el estado de la tarea...");
+				console.log(e.target);
+
+				const id = e.target.id;
+				const uriTareaId = `${urlTareas}/${id}`;
+				const payload = {};
+
+				//segun el tipo de boton de fue clickeado cambiamos el estado de la tarea
+				if (e.target.classList.contains("incompleta")) {
+					//si la tarea esta completada y la paso a pendiente
+					payload.completed = false;
+				} else {
+					//si la tarea esta pedniente y la paso a completada
+					payload.completed = true;
+				}
+				console.log(payload);
+
+				const settings = {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						authorization: token,
+					},
+					body: JSON.stringify(payload),
+				};
+
+				//hacemos el fetch
+				fetch(uriTareaId, settings)
+					.then((response) => {
+						console.log(response.status);
+						// vuelvo a consultar las tareas actualizadas y renderizarlas niievamente en pantalla
+						consultarTareas();
+					})
+					.catch((err) => console.log(err));
+			});
+		});
+	}
 
 	/* -------------------------------------------------------------------------- */
 	/*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
